@@ -4,22 +4,16 @@ import { deleteTodo } from "../redux/action/todoAction";
 import { updateTodo } from "../redux/action/todoAction";
 import { completedTodo } from "../redux/action/todoAction";
 import { Icon } from "@iconify/react";
+import PropTypes from "prop-types";
 
-const Item = ({ todo, id, done, comp }) => {
+const Item = ({ todo, id,  comp }) => {
   const dispatch = useDispatch();
-  const doneCheck = done;
-  const [isDone, setIsDone] = useState(doneCheck);
   const [complete, setComplete] = useState(false);
   const inputRef = useRef(true);
 
   const delTodo = (id) => {
     dispatch(deleteTodo(id));
   };
-
-  // const handleCheck = () => {
-  //   setIsDone(!isDone);
-  //   setComplete(!complete)
-  // };
 
   const changeFocus = () => {
     inputRef.current.disabled = false;
@@ -43,12 +37,11 @@ const Item = ({ todo, id, done, comp }) => {
   // };
 
   return (
-    <div id="list" key={id}>
+    <div id="list">
       <div className="form-check">
         <textarea
           defaultValue={todo}
           className={comp === true ? "disable" : "form-check-label"}
-          id={`${isDone ? "checked" : ""}`}
           htmlFor="flexCheckDefault"
           ref={inputRef}
           disabled={inputRef}
@@ -90,4 +83,10 @@ const Item = ({ todo, id, done, comp }) => {
   );
 };
 
+Item.propTypes = {
+  todo: PropTypes.string,
+  id: PropTypes.string,
+  comp : PropTypes.bool
+  
+};
 export default Item;

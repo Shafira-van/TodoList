@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getTodo } from "../redux/action/todoAction";
-import { connect } from "react-redux";
 import Item from "./Item";
 
 function List() {
@@ -41,7 +40,7 @@ function List() {
           {todos.length > 0 && sort === "all"
             ? todos.map((item) => {
                 return (
-                  <div className="row">
+                  <div className="row" key={item.id}>
                     <Item
                       id={item.id}
                       todo={item.todo}
@@ -57,7 +56,7 @@ function List() {
             ? todos.map((item) => {
                 return (
                   item.complete === false && (
-                    <div className="row">
+                    <div className="row" key={item.id}>
                       <Item
                         id={item.id}
                         todo={item.todo}
@@ -73,7 +72,7 @@ function List() {
             ? todos.map((item) => {
                 return (
                   item.complete === true && (
-                    <div className="row">
+                    <div className="row" key={item.id}>
                       <Item
                         id={item.id}
                         todo={item.todo}
