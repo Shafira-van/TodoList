@@ -8,6 +8,7 @@ const initialState = {
 };
 
 const todoReducer = (state = initialState, action) => {
+  
   switch (action.type) {
     case SUCCESS_GET_TODO:
       return {
@@ -25,20 +26,16 @@ const todoReducer = (state = initialState, action) => {
         todos:  state.todos.filter((data) => data.id != action.payload.id )
       }
     case SUCCESS_UPDATE_TODO:
-      const updTodo = action.payload
       return {    
         ...state,
-        updTodo
       }
     case SUCCESS_COMPLETED_TODO:    
-      
-      console.log(state.todos)
       return {    
-        ...state,
-        todos: state.todos.splice((data) => data.id, 1, data.complete = "true")
-
+        todos: [...state.todos, action.payload]
       }
+      
     default:
+      
       return state;
     
   }
