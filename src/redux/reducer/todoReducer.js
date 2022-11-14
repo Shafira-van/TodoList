@@ -2,11 +2,10 @@
 import { SUCCESS_ADD_TODO, SUCCESS_GET_TODO, SUCCESS_DELETE_TODO, SUCCESS_UPDATE_TODO, SUCCESS_COMPLETED_TODO} from "../action/todoAction";
 
 const initialState = {
-  updTodo: [],
+  // updTodo: [],
   todos: [],
   err: null
 };
-
 const todoReducer = (state = initialState, action) => {
   
   switch (action.type) {
@@ -20,18 +19,20 @@ const todoReducer = (state = initialState, action) => {
         todos: [...state.todos, action.payload],
       };
     case SUCCESS_DELETE_TODO:
-      // console.log(action.payload.id)
       return {
         ...state,
         todos:  state.todos.filter((data) => data.id != action.payload.id )
       }
     case SUCCESS_UPDATE_TODO:
       return {    
-        ...state,
+        ...state
       }
     case SUCCESS_COMPLETED_TODO:    
+      const jj = state.todos.filter((data) => data.id != action.payload.id)
       return {    
-        todos: [...state.todos, action.payload]
+        ...state,
+      jj : jj.push(action.payload),
+      todos : jj
       }
       
     default:
